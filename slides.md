@@ -122,7 +122,6 @@ export class CreateTaskModalComponent {
     )
 } 
 ```
-
 ---
 
 # Angular Services
@@ -297,7 +296,6 @@ import { async, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule,HttpTestingController,TestRequest } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { ApiService } from '@lot-maintenance-ui-http/api.service';
-import { NotificationService } from '@lot-maintenance-ui-core/notifications/notification.service';
 import { portfolioMock } from '@lot-maintenance-ui-core/mocks/create-task.mock';
 import { PortfolioService } from './portfolio.service';
 
@@ -307,8 +305,8 @@ describe('PortfolioService', () => {
 
   beforeEach(async(() => { // Think NUnit [SetUp] 
     TestBed.configureTestingModule({ // This should look like the @NgModule decorator
-      imports: [  HttpClientTestingModule, ], 
-      providers: [ ApiService, NotificationService, PortfolioService ]
+      imports: [  HttpClientTestingModule ], 
+      providers: [ ApiService, PortfolioService ]
     })
     .compileComponents();
 
@@ -316,14 +314,12 @@ describe('PortfolioService', () => {
     service = TestBed.get(PortfolioService);
     httpMock = TestBed.get(HttpTestingController);
     spyOn(apiService, 'getPortfolioList').and.returnValue((of(portfolioMock)));
-    apiService.getPortfolioList().subscribe((list) => {
-      expect(list).toEqual(portfolioMock);
-    });
+    apiService.getPortfolioList().subscribe((list) => { expect(list).toEqual(portfolioMock); });
     request = httpMock.match(`/api/portfolios`);
     expect(request[0].request.method).toBe('GET');
   })); // End of beforeEach()
 
-  it('should create', () => {
+  it('should return portfolios', () => {
     expect(service.getPortfolioList()).toEqual([]); // Before API returns portfolios, list is empty
     request[0].flush(portfolioMock);
     expect(service.getPortfolioList()).toEqual(portfolioMock); // Afterwards, returns mock response
