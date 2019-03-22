@@ -1,6 +1,6 @@
 class: center, middle
 
-# Angular for ASP.NET Developers
+# Front End Development Tools
 ### With Examples from Lot Maintenance
 
 ---
@@ -21,8 +21,8 @@ class: center, middle
 
 # Angular
 - A frontend framework developed by Google
-- V2+ had help from MS (TypeScript)
-  - V2 was a ground-up rewrite from AngularJS
+- V2+ had help from MS (written in TypeScript)
+  - A ground-up rewrite after AngularJS
 
 ##### TypeScript
 - Anders Hejlsberg, chief C# architect, involved in development
@@ -34,32 +34,32 @@ class: center, middle
 
 # TypeScript Syntax
 ```typescript
-export class Lot {
+export class Lot { // A class with a constructor
 
-  constructor(balance: number) {
+  constructor(balance: number) { // Constructor parameters with types
     this.balance = balance;
   }
 
-  lotDate: string;
+  lotDate: string; // Public properties with types
   lotId: number;
   balance: number;
   lotDateFormatted?: any;
 }
 
-export class Routes {
-  public static tasks = '/api/tasks';
+export class Routes { // A class without a constructor
+  public static tasks = '/api/tasks'; // Static strings
   public static portfolios = '/api/portfolios';
   public static username = '/.auth/me';
   public static log = '/client/log';
 }
 
-export interface Column {
+export interface Column { // An interface
   name: string;
   field: string;
   sort: Sort;
 }
 
-export enum Sort {
+export enum Sort { // An enum
   ASC = 'asc',
   DESC = 'desc'
 }
@@ -533,6 +533,7 @@ span.child {
 
 # Recap:
 #### Angular
+ - Uses TypeScript - think JS with types
  - Components use @Component, two-way data binding to DOM
  - Services use @Injectable, and are singletons, single-purpose, and stateful
  - Modules handle importing, exporting
