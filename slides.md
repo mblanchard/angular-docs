@@ -181,7 +181,7 @@ export class PortfolioService {
 - Bootstrap: Used by AppModule only
 
 #### Like services and components, just a class + decorator
-##### Here's the [module section](https://angular.io/guide/architecture-modules) of the Angular tutorial.
+Here's the [module section](https://angular.io/guide/architecture-modules) of the Angular tutorial.
 ---
 
 # Module Syntax
