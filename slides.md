@@ -1,6 +1,6 @@
 class: center, middle
 
-# Front End Development Tools
+# Front End Development
 ### With Examples from Lot Maintenance
 
 ---
