@@ -34,7 +34,8 @@ class: center, middle
 
 # TypeScript Syntax
 ```typescript
-export class Lot { // A class with a constructor
+// A class with a constructor
+export class Lot {
 
   constructor(balance: number) { // Constructor parameters with types
     this.balance = balance;
@@ -46,20 +47,23 @@ export class Lot { // A class with a constructor
   lotDateFormatted?: any;
 }
 
-export class Routes { // A class without a constructor
+// A class without a constructor
+export class Routes {
   public static tasks = '/api/tasks'; // Static strings
   public static portfolios = '/api/portfolios';
   public static username = '/.auth/me';
   public static log = '/client/log';
 }
 
-export interface Column { // An interface
+// An interface
+export interface Column {
   name: string;
   field: string;
   sort: Sort;
 }
 
-export enum Sort { // An enum
+// An enum
+export enum Sort {
   ASC = 'asc',
   DESC = 'desc'
 }
@@ -179,6 +183,7 @@ export class PortfolioService {
 - Imports: Dependencies
 - Providers: Service definitions (global)
 - Bootstrap: Used by AppModule only
+- EntryComponents: Think "treeshaker whitelist"
 
 #### Like services and components, just a class + decorator
 Here's the [module section](https://angular.io/guide/architecture-modules) of the Angular tutorial.
@@ -187,7 +192,7 @@ Here's the [module section](https://angular.io/guide/architecture-modules) of th
 # Module Syntax
 ```javascript
 @NgModule({
-  declarations: [
+  declarations: [  // What components are included?
     AppComponent,
     HeaderComponent,
     NotificationContainerComponent,
@@ -198,21 +203,20 @@ Here's the [module section](https://angular.io/guide/architecture-modules) of th
     LoaderComponent,
     ConfirmationModalComponent,
   ],
-  imports: [
+  imports: [ // What modules are required?
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    ...
     AppRoutingModule
   ],
-  providers: [
+  providers: [ // What services are defined and made globally available?
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptorService,
       multi: true
     },
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent], // What root component do we inject into the DOM?
   entryComponents: [
     CreateTaskModalComponent,
     ConfirmationModalComponent,
@@ -403,10 +407,10 @@ Here are the [docs](https://sass-lang.com/guide).
 .app-header {
     height: 72px;
     text-align: center;
-    background-color: $primary;
+    background-color: $primary; // using a variable
 
-    &__content {
-        @extend %content-wrap;
+    &__content { //Nested style with '&' for concatenation
+        @extend %content-wrap; // inheritance with 'extend'
         position: relative;
     }
 
@@ -426,8 +430,7 @@ Here are the [docs](https://sass-lang.com/guide).
         display: block;
         &__item {
             cursor: pointer;
-            background-color: desaturate(lighten($primary,13%),15%);
-
+            background-color: desaturate(lighten($primary,13%),15%); // functions
             &:hover{
                 background-color: desaturate(lighten($primary,29%),22%);
             }
@@ -529,7 +532,7 @@ span.child {
 
 # Recap:
 #### Angular
- - Uses TypeScript - think JS with types
+ - TypeScript - think JS with types
  - Components use @Component, two-way data binding to DOM
  - Services use @Injectable, and are singletons, single-purpose, and stateful
  - Modules handle importing, exporting
